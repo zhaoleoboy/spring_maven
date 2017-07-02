@@ -23,7 +23,11 @@
 			</value>
 		</property>
 	</bean>
-	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+	<!-- 配置缓存管理器 -->
+	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+		<!-- 指定 ehcache 的配置文件 -->
+		<property name="cacheManagerConfigFile" value="classpath:ehcache-shiro.xml" />
+	</bean>
 	<!-- 配置进行授权和认证的 Realm -->
 	<bean id="myRealm" class="com.xiao.service.shiro.ShiroDbRealm">
 	</bean>

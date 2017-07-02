@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.xiao.model.User;
 import com.xiao.service.user.IUserService;
-import com.xiao.service.user.impl.UserServiceImpl;
 
 
 public class ShiroDbRealm extends AuthorizingRealm {
