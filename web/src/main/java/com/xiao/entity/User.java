@@ -1,4 +1,4 @@
-package com.xiao.model;
+package com.xiao.entity;
 
 import java.io.Serializable;
 

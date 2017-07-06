@@ -1,6 +1,6 @@
-package com.xiao.dao;
+package com.xiao.mapper;
 
-import com.xiao.model.User;
+import com.xiao.entity.User;
 
 public interface UserMapper {
     /**
