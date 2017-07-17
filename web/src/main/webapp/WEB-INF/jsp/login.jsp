@@ -11,7 +11,6 @@
 <body>
 
 	<form action="##" method='post'>
-		<input type="hidden" id="userId" name="userId" value="">
 		<div class="form-group">
 			<div class="email controls">
 				<input type="text" name='"username"' id="username" placeholder="用户名"
@@ -80,13 +79,15 @@
 			})
 		}
 		
+		/**/
 		function submitForm() {
+			alert(123);
 			var username = $("#username").val();
 			var password = $("#pwd").val();
-			var vcode = $("#vcode").val();
-			var rememberMe = $('#rememberMe').is(':checked');
-
-			$.post("/ajaxLogin", {
+			var vcode = $("#validateCode").val();
+			var rememberMe = $('#remember').is(':checked');
+			var url = "${pageContext.request.contextPath}/user/ajaxLogin";
+			$.post(url, {
 				"username" : username,
 				"password" : password,
 				"vcode" : vcode,

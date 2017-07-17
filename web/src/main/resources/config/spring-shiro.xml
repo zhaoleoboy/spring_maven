@@ -33,7 +33,7 @@
 	</bean>
 	<!-- 配置 Shiro 的 SecurityManager Bean. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-		<property name="cacheManager" ref="cacheManager" />
+		<!-- <property name="cacheManager" ref="cacheManager" /> -->
 		<property name="realm" ref="myRealm" />
 	</bean>
 	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
