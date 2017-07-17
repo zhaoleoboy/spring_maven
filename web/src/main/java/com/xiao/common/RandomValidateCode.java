@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * 
@@ -102,8 +103,8 @@ public class RandomValidateCode {
 		Cookie cookie = new Cookie(key, randomString);
 		response.addCookie(cookie);
 		// 2：将随机生成的验证码放入session中
-		String sessionid = request.getSession().getId();
-		request.getSession().setAttribute(sessionid + key, randomString);
+		HttpSession session = request.getSession(true);
+		session.setAttribute(key, randomString);
 		System.out.println("*************" + randomString);
 
 		// 总结：这两种方式都不是很好，

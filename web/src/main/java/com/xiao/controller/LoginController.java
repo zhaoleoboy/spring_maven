@@ -16,7 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.xiao.entity.User;
+import com.xiao.model.User;
 import com.xiao.service.IUserService;
 
 @Controller

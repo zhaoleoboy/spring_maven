@@ -3,7 +3,9 @@
   PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
   "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 <generatorConfiguration>
-	<context id="test" targetRuntime="MyBatis3">
+	<classPathEntry
+		location="C:\Users\leo\.m2\repository\mysql\mysql-connector-java\5.1.18\mysql-connector-java-5.1.18.jar" />
+	<context id="auto" targetRuntime="MyBatis3">
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
 		<plugin type="org.mybatis.generator.plugins.ToStringPlugin"></plugin>
@@ -16,8 +18,8 @@
 		</commentGenerator>
 		<!--数据库链接URL，用户名、密码 -->
 		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
-			connectionURL="jdbc:mysql://120.27.102.176/yun" userId="root" password="Leo@0624">
-		</jdbcConnection>
+			connectionURL="jdbc:mysql://120.27.102.176:3306/yun" userId="root"
+			password="Leo@0624" />
 		<javaTypeResolver>
 			<!-- This property is used to specify whether MyBatis Generator should 
 				force the use of java.math.BigDecimal for DECIMAL and NUMERIC fields, -->

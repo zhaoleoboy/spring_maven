@@ -29,7 +29,7 @@
 		<property name="cacheManagerConfigFile" value="classpath:config/ehcache-shiro.xml" />
 	</bean>
 	<!-- 配置进行授权和认证的 Realm -->
-	<bean id="myRealm" class="com.xiao.service.shiro.ShiroDbRealm">
+	<bean id="myRealm" class="com.xiao.auth.ShiroDbRealm">
 	</bean>
 	<!-- 配置 Shiro 的 SecurityManager Bean. -->
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">

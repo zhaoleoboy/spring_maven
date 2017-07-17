@@ -14,8 +14,8 @@
 		<input type="hidden" id="userId" name="userId" value="">
 		<div class="form-group">
 			<div class="email controls">
-				<input type="text" name='loginName' id="loginName" placeholder="用户名"
-					value="" class='form-control' />
+				<input type="text" name='"username"' id="username" placeholder="用户名"
+					class='form-control' />
 			</div>
 		</div>
 		<div class="form-group">
@@ -32,7 +32,7 @@
 					placeholder="输入验证码" />
 			</div>
 			<span class="y_yzimg"><img id="codeValidateImg"
-				onClick="javascript:flushValidateCode();" /></span>
+				onClick="javascript:flushValidateCode();" alt="验证码" /></span>
 			<p class="y_change">
 				<a href="javascript:flushValidateCode();">换一张</a>
 			</p>
@@ -44,7 +44,6 @@
 
 		<div class="submit">
 			<div class="remember">
-
 				<input type="checkbox" name="remember" value="1" class='icheck-me'
 					data-skin="square" data-color="blue" id="remember"> <label
 					for="remember">记住我</label>
@@ -62,8 +61,9 @@
 		/* 刷新生成验证码 */
 		function flushValidateCode() {
 			var validateImgObject = document.getElementById("codeValidateImg");
-			validateImgObject.src = "${pageContext.request.contextPath }/user/getSysManageLoginCode.action?time="
+			var src = "${pageContext.request.contextPath }/user/getSysManageLoginCode.action?time="
 					+ new Date();
+			validateImgObject.src = src;
 		}
 		/*校验验证码输入是否正确*/
 		function checkImg(code) {
@@ -78,6 +78,26 @@
 					flushValidateCode();
 				}
 			})
+		}
+		
+		function submitForm() {
+			var username = $("#username").val();
+			var password = $("#pwd").val();
+			var vcode = $("#vcode").val();
+			var rememberMe = $('#rememberMe').is(':checked');
+
+			$.post("/ajaxLogin", {
+				"username" : username,
+				"password" : password,
+				"vcode" : vcode,
+				"rememberMe" : rememberMe
+			}, function(result) {
+				if (result.status == 200) {
+					location.href = "/index";
+				} else {
+					$("#erro").html(result.message);
+				}
+			});
 		}
 	</script>
 
