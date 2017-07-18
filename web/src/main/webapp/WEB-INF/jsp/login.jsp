@@ -50,6 +50,7 @@
 			<input type="button" value="登录" onclick="javascript:submitForm();"
 				class='btn btn-primary'>
 		</div>
+		<p id="error"></p>
 	</form>
 
 	<script type="text/javascript">
@@ -81,7 +82,6 @@
 		
 		/**/
 		function submitForm() {
-			alert(123);
 			var username = $("#username").val();
 			var password = $("#pwd").val();
 			var vcode = $("#validateCode").val();
@@ -94,9 +94,9 @@
 				"rememberMe" : rememberMe
 			}, function(result) {
 				if (result.status == 200) {
-					location.href = "/index";
+					location.href = "${pageContext.request.contextPath}/user/hello.action";
 				} else {
-					$("#erro").html(result.message);
+					$("#error").html(result.message);
 				}
 			});
 		}

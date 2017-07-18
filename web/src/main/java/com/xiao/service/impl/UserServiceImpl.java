@@ -29,7 +29,7 @@ public class UserServiceImpl implements IUserService {
 	 * 通过username查找user
 	 */
 	@Override
-	public User getUserBynName(String name) {
+	public User getUserByName(String name) {
 		User user = userMapper.getUserByName(name);
 		return user;
 	}

@@ -3,15 +3,47 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
 	<!-- 启用shrio授权注解拦截方式 -->
+	<description>== Shiro Components ==</description>
+	<!-- 会话ID生成器 -->
+	<bean id="sessionIdGenerator"
+		class="org.apache.shiro.session.mgt.eis.JavaUuidSessionIdGenerator" />
+	<!-- 用户信息记住我功能的相关配置 -->
+	<bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<constructor-arg value="v_v-re-baidu" />
+		<property name="httpOnly" value="true" />
+		<!-- 配置存储rememberMe Cookie的domain为 一级域名 -->
+		<property name="domain" value=".itboy.net" />
+		<property name="maxAge" value="2592000" /><!-- 30天时间，记住我30天 -->
+	</bean>
+	<!-- rememberMe管理器 -->
+	<bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+		<!-- rememberMe cookie加密的密钥 建议每个项目都不一样 默认AES算法 密钥长度（128 256 512 位） -->
+		<property name="cipherKey"
+			value="#{T(org.apache.shiro.codec.Base64).decode('4AvVhmFLUs0KTA3Kprsdag==')}" />
+		<property name="cookie" ref="rememberMeCookie" />
+	</bean>
+	<!-- 会话Cookie模板 -->
+	<bean id="sessionIdCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+		<!--cookie的name，我故意取名叫xxxxbaidu -->
+		<constructor-arg value="v_v-s-baidu" />
+		<property name="httpOnly" value="true" />
+		<!--cookie的有效时间 -->
+		<property name="maxAge" value="-1" />
+		<!-- 配置存储Session Cookie的domain为 一级域名 -->
+		<property name="domain" value=".itboy.net" />
+	</bean>
+	
+	
+
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<!-- 装配 securityManager -->
 		<property name="securityManager" ref="securityManager" />
 		<!-- 配置登陆页面 -->
-		<property name="loginUrl" value="/index.jsp" />
+		<property name="loginUrl" value="/jsp/login.jsp" />
 		<!-- 登陆成功后的一面 -->
 		<property name="successUrl" value="/jsp/success.jsp" />
 		<property name="unauthorizedUrl" value="/jsp/unauthorized.jsp" />
-		<!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. -->
+		<!-- 具体配置需要拦截哪些 URL, 以及访问对应的 URL 时使用 Shiro 的什么 Filter 进行拦截. 
 		<property name="filterChainDefinitions">
 			<value>
 				/index.jsp=anon
@@ -22,6 +54,9 @@
 				/logout=logout
 			</value>
 		</property>
+		-->
+		
+		
 	</bean>
 	<!-- 配置缓存管理器 -->
 	<bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
@@ -35,6 +70,7 @@
 	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
 		<!-- <property name="cacheManager" ref="cacheManager" /> -->
 		<property name="realm" ref="myRealm" />
+		<property name="rememberMeManager" ref="rememberMeManager" />
 	</bean>
 	<!-- 配置 Bean 后置处理器: 会自动的调用和 Spring 整合后各个组件的生命周期方法. -->
 	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />

@@ -6,7 +6,7 @@ public interface IUserService {
 
 	public User listUsers(Long id);
 	
-	public User getUserBynName(String name);
+	public User getUserByName(String name);
 
 	public User doUserLogin(User userLogin);
 }

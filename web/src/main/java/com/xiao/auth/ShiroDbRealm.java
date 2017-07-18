@@ -23,16 +23,28 @@ public class ShiroDbRealm extends AuthorizingRealm {
 
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String username = (String) principals.getPrimaryPrincipal();
 		SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 		return authorizationInfo;
 
 	}
+	
+	/**
+	 * 
+	 * @param username
+	 * @return
+	 */
+	public String test(String username){
+		return "";
+	}
 
+	
+	/**
+	 * 
+	 */
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		String username = (String) token.getPrincipal();
-		User user = userService.getUserBynName(username);
+		User user = userService.getUserByName(username);
 		if (user == null) {
 			throw new UnknownAccountException();// 没找到帐号
 		}
