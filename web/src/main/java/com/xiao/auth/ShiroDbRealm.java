@@ -27,17 +27,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		return authorizationInfo;
 
 	}
-	
-	/**
-	 * 
-	 * @param username
-	 * @return
-	 */
-	public String test(String username){
-		return "";
-	}
 
-	
 	/**
 	 * 
 	 */
